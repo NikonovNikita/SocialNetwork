@@ -7,36 +7,26 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SocialNetwork.BLL.Validators;
 
 namespace SocialNetwork.BLL.Services;
 
 public class UserService
 {
     IUserRepository userRepository;
-    public UserService()
+    UserValidator userValidator;
+    UserAuthValidator userAuthValidator;
+
+    internal UserService(IUserRepository userRepository)
     {
-        userRepository = new UserRepository();
+        this.userRepository = userRepository;
+        userValidator = new UserValidator(userRepository);
+        userAuthValidator = new UserAuthValidator(userRepository);
     }
 
     public void Register(UserRegistrationData userRegistrationData)
     {
-        if (string.IsNullOrEmpty(userRegistrationData.FirstName))
-            throw new ArgumentNullException();
-
-        if(string.IsNullOrEmpty(userRegistrationData.LastName))
-            throw new ArgumentNullException();
-
-        if(string.IsNullOrEmpty(userRegistrationData.Password))
-            throw new ArgumentNullException();
-
-        if(userRegistrationData.Password.Length < 8)
-            throw new ArgumentException();
-
-        if(!new EmailAddressAttribute().IsValid(userRegistrationData.Email))
-            throw new ArgumentException();
-
-        if(userRepository.FindByEmail(userRegistrationData.Email) != null)
-            throw new ArgumentException();
+        userValidator.UserValidation(userRegistrationData);
 
         var userEntity = new UserEntity()
         {
@@ -52,15 +42,9 @@ public class UserService
 
     public User Authenticate(UserAuthenticationData userAuthenticationData)
     {
-        var findUserEntity = userRepository.FindByEmail(userAuthenticationData.Email);
-        
-        if(findUserEntity == null)
-            throw new UserNotFoundException();
-        
-        if (findUserEntity.password != userAuthenticationData.Password)
-            throw new WrongPasswordException();
+        var findedUserEntity = userAuthValidator.AuthValidation(userAuthenticationData);
 
-        return ConstructUserModel(findUserEntity);
+        return ConstructUserModel(findedUserEntity);
     }
 
     public void Update(User user)

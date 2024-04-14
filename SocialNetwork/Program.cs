@@ -1,10 +1,11 @@
 ﻿using SocialNetwork.BLL.Exceptions;
 using SocialNetwork.BLL.Models;
 using SocialNetwork.BLL.Services;
+using SocialNetwork.DAL.Repositories;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 class Program
 {
-    static UserService userService = new UserService();
+    static UserService userService = new UserService(new UserRepository());
     static void Main(string[] args)
     {
         Console.WriteLine("Добро пожаловать в социальную сеть!\n");
@@ -84,6 +85,10 @@ class Program
 
                                             break;
                                         }
+                                    case "5":
+                                        {
+                                            
+                                        }
                                 }
                             }
                         }
@@ -118,7 +123,10 @@ class Program
                         {
                             userService.Register(new UserRegistrationData
                             { FirstName = firstNameInput, LastName = lastNameInput, Password = passwordInput, Email = emailInput });
+                            
+                            Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("Регистрация прошла успешно!");
+                            Console.ForegroundColor = ConsoleColor.White;
                         }
                         catch (ArgumentNullException ane)
                         {
