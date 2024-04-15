@@ -36,11 +36,12 @@ class Program
 
                             while (true)
                             {
-                                Console.WriteLine("Посмотреть информацию о моем профиле --> 1");
+                                Console.WriteLine("\nПосмотреть информацию о моем профиле --> 1");
                                 Console.WriteLine("Редактировать мой профиль --> 2");
                                 Console.WriteLine("Добавить в друзья --> 3");
                                 Console.WriteLine("Написать сообщение --> 4");
-                                Console.WriteLine("Выйти из профиля --> 5");
+                                Console.WriteLine("Проверить сообщения --> 5");
+                                Console.WriteLine("Выйти из профиля --> q");
 
                                 switch (Console.ReadLine())
                                 {
@@ -85,9 +86,9 @@ class Program
 
                                             break;
                                         }
-                                    case "5":
+                                    case "q":
                                         {
-                                            
+                                            throw new ExitFromAccountException();
                                         }
                                 }
                             }
@@ -102,6 +103,12 @@ class Program
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Неверный пароль!");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                        catch (ExitFromAccountException)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("Вы вышли из своего аккаунта!");
                             Console.ForegroundColor = ConsoleColor.White;
                         }
 

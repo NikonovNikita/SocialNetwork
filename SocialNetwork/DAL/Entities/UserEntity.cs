@@ -16,5 +16,4 @@ public class UserEntity
     public string photo { get; set; }
     public string favourite_movie { get; set; }
     public string favourite_book { get; set; }
-
 }
