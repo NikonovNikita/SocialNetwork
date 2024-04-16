@@ -13,13 +13,13 @@ namespace SocialNetwork.BLL.Services;
 
 public class UserService
 {
-    IUserRepository userRepository;
+    private IUserRepository _userRepository;
     UserValidator userValidator;
     UserAuthValidator userAuthValidator;
 
     internal UserService(IUserRepository userRepository)
     {
-        this.userRepository = userRepository;
+        _userRepository = userRepository;
         userValidator = new UserValidator(userRepository);
         userAuthValidator = new UserAuthValidator(userRepository);
     }
@@ -36,7 +36,7 @@ public class UserService
             email = userRegistrationData.Email,
         };
 
-        if (userRepository.Create(userEntity) == 0)
+        if (_userRepository.Create(userEntity) == 0)
             throw new Exception("Не удалось создать нового пользователя :(");
     }
 
@@ -61,7 +61,7 @@ public class UserService
             favourite_book = user.FavouriteBook
         };
 
-        if(userRepository.Update(updatableUserEntity) == 0)
+        if(_userRepository.Update(updatableUserEntity) == 0)
             throw new Exception("Не удалось обновить :(");
     }
 

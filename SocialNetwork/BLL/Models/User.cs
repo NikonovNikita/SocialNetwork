@@ -11,6 +11,9 @@ public class User
     public string FavouriteMovie { get; set; }
     public string FavouriteBook { get; set; }
 
+    public IEnumerable<Message> IncomingMessages { get; set; }
+    public IEnumerable<Message> OutcomingMessages { get; set; }
+
     public User(int id, string firstName, string lastName, string password, string email, 
         string photo, 
         string favouriteMovie, 
