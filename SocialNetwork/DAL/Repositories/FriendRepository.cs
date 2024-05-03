@@ -21,6 +21,7 @@ internal class FriendRepository : BaseRepository, IFriendRepository
     }
     public IEnumerable<FriendEntity> FindAllByUserId(int userId)
     {
-        return Query<FriendEntity>(@"select * from friends where user_id = :user_id", new {user_id = userId});
+        return Query<FriendEntity>(@"select * from friends where user_id = :user_id or friend_id = :user_id",
+            new {user_id = userId});
     }
 }
