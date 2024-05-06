@@ -19,9 +19,16 @@ internal class FriendRepository : BaseRepository, IFriendRepository
     {
         return Execute(@"delete from friends where id = :id_p", new { id_p = id });
     }
+
     public IEnumerable<FriendEntity> FindAllByUserId(int userId)
     {
         return Query<FriendEntity>(@"select * from friends where user_id = :user_id or friend_id = :user_id",
             new {user_id = userId});
+    }
+
+    public FriendEntity FindFriendEntityByIds(int firstId, int secondId)
+    {
+        return QueryFirstOrDefault<FriendEntity>(@"select * from friends where (user_id = :firstId and friend_id = :secondId)
+                                    or (user_id = :secondId and friendId = :firstId)", new { firstId, secondId });
     }
 }

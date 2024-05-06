@@ -39,12 +39,6 @@ namespace SocialNetwork.BLL.Validators
             if (findedUserEntity == null)
                 throw new UserNotFoundException();
 
-            //Сделать проверку, существует ли пользователь уже в друзьях
-
-            //Сделать проверку, существует ли уже запрос выбранному пользователю
-
-            //Сделать проверку, не существует ли уже запрос от желаемого пользователя текущему, чтобы не дублировать заявки
-
             return findedUserEntity;
         }
     }

@@ -20,9 +20,15 @@ namespace SocialNetwork.DAL.Repositories
             return Execute("delete from friend_requests where id = :id", new {id = friendRequestEntityId});
         }
 
+        public FriendRequestEntity FindFriendRequestEntityByIds(int senderId, int recipientId)
+        {
+            return QueryFirstOrDefault<FriendRequestEntity>(@"select * from friend_requests where sender_id = :senderId
+                                                            and recipient_id = :recipientId", new {senderId, recipientId});
+        }
+
         public IEnumerable<FriendRequestEntity> GetAllRequests(int recipient_id)
         {
-            return Query<FriendRequestEntity>("select * from friend_requests where recipient_id = :recipient_id", 
+            return Query<FriendRequestEntity>("select * from friend_requests where recipient_id = :recipient_id",
                 new { recipient_id });
         }
     }

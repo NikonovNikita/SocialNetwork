@@ -12,11 +12,13 @@ namespace SocialNetwork.PLL.Views
     {
         UserService userService;
         MessageService messageService;
+        FriendService friendService;
 
-        public UserMenuView(UserService userService, MessageService messageService)
+        public UserMenuView(UserService userService, MessageService messageService, FriendService friendService)
         {
             this.userService = userService;
             this.messageService = messageService;
+            this.friendService = friendService;
         }
 
         public void Show(User user)

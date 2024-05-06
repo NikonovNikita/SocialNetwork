@@ -13,6 +13,7 @@ public class User
 
     public IEnumerable<Message> IncomingMessages { get; set; }
     public IEnumerable<Message> OutcomingMessages { get; set; }
+    public IEnumerable<FriendRequest> IncomingFriendRequests { get; set; }
 
     public User(int id, string firstName, string lastName, string password, string email, 
         string photo, 

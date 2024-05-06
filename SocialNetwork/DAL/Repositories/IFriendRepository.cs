@@ -12,4 +12,5 @@ internal interface IFriendRepository
     int Create(FriendEntity friendEntity);
     IEnumerable<FriendEntity> FindAllByUserId(int userId);
     int Delete(int id);
+    FriendEntity FindFriendEntityByIds(int firstId, int secondId);
 }
