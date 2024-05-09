@@ -13,4 +13,5 @@ internal interface IFriendRequestRepository
     int Delete(int friendRequestEntityId);
     IEnumerable<FriendRequestEntity> GetAllRequests(int recipient_id);
     FriendRequestEntity FindFriendRequestEntityByIds(int senderId, int recipientId);
+    FriendRequestEntity FindById(int id);
 }

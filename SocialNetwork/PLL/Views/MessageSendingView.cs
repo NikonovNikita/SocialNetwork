@@ -14,12 +14,10 @@ namespace SocialNetwork.PLL.Views;
 
 internal class MessageSendingView
 {
-    UserService userService;
     MessageService messageService;
 
-    public MessageSendingView(UserService userService, MessageService messageService)
+    public MessageSendingView(MessageService messageService)
     {
-        this.userService = userService;
         this.messageService = messageService;
     }
 

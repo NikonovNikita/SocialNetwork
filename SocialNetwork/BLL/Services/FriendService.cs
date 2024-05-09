@@ -67,25 +67,36 @@ public class FriendService
             throw new Exception();
     }
 
-    public void AddFriend(FriendRequestEntity friendRequestEntity)
+    public void AddFriend(FriendRequest friendRequest)
     {
+        var friendRequestEntity = friendRequestRepository.FindById(friendRequest.Id);
+        
         var friendEntity = new FriendEntity { user_id = friendRequestEntity.recipient_id, friend_id = friendRequestEntity.sender_id };
+
+        if (friendRequestRepository.Delete(friendRequest.Id) == 0)
+            throw new Exception();
 
         if(friendRepository.Create(friendEntity) == 0)
             throw new Exception();
     }
 
+    public void RejectFriendRequest(FriendRequest friendRequest)
+    {
+        if(friendRequestRepository.Delete(friendRequest.Id) == 0)
+            throw new Exception();
+    }
+
     private void CheckFriendRequest(FriendRequestData friendRequestData, UserEntity recipientEntity)
     {
-        //Сделать проверку, существует ли пользователь уже в друзьях
+        //Проверка, существует ли пользователь уже в друзьях
         if (friendRepository.FindFriendEntityByIds(friendRequestData.Sender_Id, recipientEntity.id) != null)
             throw new AlreadyFriendException();
 
-        //Сделать проверку, существует ли уже запрос выбранному пользователю
+        //Проверка, существует ли уже запрос выбранному пользователю
         if(friendRequestRepository.FindFriendRequestEntityByIds(friendRequestData.Sender_Id, recipientEntity.id) != null)
             throw new RequestDuplicateException();
 
-        //Сделать проверку, не существует ли уже запрос от желаемого пользователя текущему, чтобы не дублировать заявки
+        //Проверка, не существует ли уже запрос от желаемого пользователя текущему, чтобы не дублировать заявки
         if(friendRequestRepository.FindFriendRequestEntityByIds(recipientEntity.id, friendRequestData.Sender_Id) != null)
             throw new RequestDuplicateException();
     }

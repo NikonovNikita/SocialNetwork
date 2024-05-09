@@ -29,6 +29,6 @@ internal class FriendRepository : BaseRepository, IFriendRepository
     public FriendEntity FindFriendEntityByIds(int firstId, int secondId)
     {
         return QueryFirstOrDefault<FriendEntity>(@"select * from friends where (user_id = :firstId and friend_id = :secondId)
-                                    or (user_id = :secondId and friendId = :firstId)", new { firstId, secondId });
+                                    or (user_id = :secondId and friend_id = :firstId)", new { firstId, secondId });
     }
 }
