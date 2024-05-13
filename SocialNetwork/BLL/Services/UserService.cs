@@ -17,7 +17,7 @@ public class UserService
     UserValidator userValidator;
     UserAuthValidator userAuthValidator;
 
-    internal UserService(IUserRepository userRepository)
+    public UserService(IUserRepository userRepository)
     {
         _userRepository = userRepository;
         userValidator = new UserValidator(userRepository);

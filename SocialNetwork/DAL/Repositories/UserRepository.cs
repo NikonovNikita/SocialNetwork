@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.DAL.Repositories;
 
-internal class UserRepository : BaseRepository, IUserRepository
+public class UserRepository : BaseRepository, IUserRepository
 {
     public int Create(UserEntity userEntity)
     {

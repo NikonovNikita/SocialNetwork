@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.DAL.Repositories;
 
-internal interface IUserRepository
+public interface IUserRepository
 {
     int Create(UserEntity userEntity);
     UserEntity FindByEmail(string email);

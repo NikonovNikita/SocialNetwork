@@ -14,14 +14,10 @@ namespace SocialNetwork.BLL.Validators
     internal class FriendRequestValidator
     {
         private IUserRepository _userRepository;
-        private IFriendRepository _friendRepository;
-        private IFriendRequestRepository _friendRequestRepository;
-        public FriendRequestValidator(IUserRepository userRepository, IFriendRepository friendRepository,
-            IFriendRequestRepository friendRequestRepository)
+
+        public FriendRequestValidator(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            _friendRepository = friendRepository;
-            _friendRequestRepository = friendRequestRepository;
         }
         public UserEntity Validate(FriendRequestData friendRequestData)
         {

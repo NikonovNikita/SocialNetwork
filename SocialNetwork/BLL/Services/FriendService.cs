@@ -18,7 +18,7 @@ public class FriendService
         this.friendRepository = friendRepository;
         this.friendRequestRepository = friendRequestRepository;
         this.userRepository = userRepository;
-        friendRequestValidator = new FriendRequestValidator(userRepository, friendRepository, friendRequestRepository);
+        friendRequestValidator = new FriendRequestValidator(userRepository);
     }
     public IEnumerable<Friend> GetFriends(int userId)
     {

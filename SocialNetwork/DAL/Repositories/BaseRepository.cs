@@ -4,7 +4,7 @@ using System.Data.SQLite;
 
 namespace SocialNetwork.DAL.Repositories;
 
-internal class BaseRepository
+public class BaseRepository
 {
     protected T QueryFirstOrDefault<T>(string sql, object parameters = null)
     {
