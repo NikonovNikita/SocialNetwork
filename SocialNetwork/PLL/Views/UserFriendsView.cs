@@ -20,7 +20,9 @@ namespace SocialNetwork.PLL.Views
             Console.WriteLine("Мои друзья:");
             friends.ToList().ForEach(f =>
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($"\n{f.FirstName} {f.LastName} ({f.Email})");
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine($"Ссылка на фото: {f.Photo}");
                 Console.WriteLine($"Любимый фильм: {f.Favourite_Movie}"); //Сделать проверку на null как-то
                 Console.WriteLine($"Любимая книга: {f.Favourite_Book}"); //Сделать проверку на null как-то
